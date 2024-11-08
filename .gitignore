@@ -1,5 +1,7 @@
-# Byte-compiled
+# Byte-compiled / Build / Distribution / Egg / Pycache files
 __pycache__/
+build/
+*.egg-info/
 
 # macOS
 .DS_Store

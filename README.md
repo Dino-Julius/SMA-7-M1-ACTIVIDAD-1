@@ -47,7 +47,7 @@ Para descargar y ejecutar el proyecto, sigue estos pasos:
 
 3. Instala las dependencias:
     ```sh
-    pip install -r requirements.txt
+    pip install .
     ```
 
 4. Ejecuta la simulación:
