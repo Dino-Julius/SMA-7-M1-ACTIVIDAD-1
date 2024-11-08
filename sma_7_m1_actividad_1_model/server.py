@@ -1,6 +1,14 @@
 """
 Configura los elementos de visualización e instancia un servidor para la simulación de agentes de limpieza,
 incluyendo la visualización de datos recolectados.
+
+Autores:
+- A01749879 Julio Cesar Vivas Medina
+- A01798380 Ulises Jaramillo Portilla
+
+Fecha de creación: 2024-11-07
+
+Fecha de modificación 2024-11-07
 """
 
 from .model import CleaningModel  # Importa el modelo de limpieza
