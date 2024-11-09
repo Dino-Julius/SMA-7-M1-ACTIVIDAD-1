@@ -15,8 +15,6 @@ from .model import CleaningModel  # Importa el modelo de limpieza
 import mesa
 
 # Función de representación del agente en la visualización
-
-
 def agent_portrayal(agent):
     """
     Define cómo se verá un agente en la visualización.
@@ -32,7 +30,7 @@ def agent_portrayal(agent):
     # Color y capa del agente basado en su estado
     if agent.is_cleaning:  # Verifica si el agente está limpiando
         portrayal["Color"] = "red"  # Rojo si está limpiando
-        portrayal["Layer"] = 0
+        portrayal["Layer"] = 1
         portrayal["r"] = 1  # Radio más grande para indicar acción de limpieza
     else:
         portrayal["Color"] = "green"  # Verde si no está limpiando
@@ -41,6 +39,19 @@ def agent_portrayal(agent):
 
     return portrayal
 
+# Función de representación de las celdas en la visualización
+def cell_portrayal(cell):
+    """
+    Define cómo se verá una celda en la visualización.
+    - Si la celda está sucia, se muestra como un círculo café. (No funcional)
+    - Si la celda está limpia, no se muestra.
+    """
+    if cell.sucia:
+        portrayal = {"Shape": "circle", "Filled": "true", "r": 0.5, "Color": "brown"}
+    else:
+        portrayal = {"Shape": "rect", "w": 1, "h": 1, "Filled": "true", "Color": "white"}
+
+    return portrayal
 
 # Configuración de la cuadrícula para la visualización de agentes y la habitación
 grid = mesa.visualization.CanvasGrid(agent_portrayal, 10, 10, 500, 500)
@@ -73,8 +84,6 @@ chart_limpias_vs_sucias = mesa.visualization.ChartModule(
 )
 
 # Elemento de texto para mostrar estadísticas generales de la simulación
-
-
 class SimulationDataElement(mesa.visualization.TextElement):
     """
     Elemento de texto para mostrar:
@@ -102,7 +111,6 @@ class SimulationDataElement(mesa.visualization.TextElement):
             f"Celdas Sucias/Limpias: {celdas_sucias_restantes}/{celdas_limpias}<br>" \
             f"Movimientos Totales: {movimientos_totales}<br>" \
             f"Tiempo Transcurrido: {tiempo_transcurrido}/{tiempo_maximo}<br>"
-
 
 # Parámetros del modelo de limpieza
 model_kwargs = {

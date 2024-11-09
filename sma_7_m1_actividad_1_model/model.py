@@ -83,14 +83,18 @@ class CleaningAgent(mesa.Agent):  # noqa
 
     def move(self):
         '''
-        Mueve al agente a una celda vecina aleatoria.
+        Mueve al agente a una celda vecina aleatoria que no esté ocupada por otro agente.
         '''
         possible_steps = self.model.grid.get_neighborhood(
             self.pos, moore=True, include_center=False
         )
-        new_position = self.random.choice(possible_steps)
-        self.model.grid.move_agent(self, new_position)
-        self.movimientos += 1
+        # Filtrar las posiciones que ya están ocupadas por otros agentes
+        possible_steps = [step for step in possible_steps if self.model.grid.is_cell_empty(step)]
+        
+        if possible_steps:
+            new_position = self.random.choice(possible_steps)
+            self.model.grid.move_agent(self, new_position)
+            self.movimientos += 1
 
     def clean_cell(self):
         '''
@@ -118,7 +122,6 @@ class CleaningModel(mesa.Model):
     """
     Modelo de simulación de agentes limpiadores en una habitación de MxN.
     """
-
     def __init__(self, M, N, num_agents, porcentaje_sucias, tiempo_max):
         super().__init__()
         # Inicialización de la habitación con celdas sucias.
@@ -127,7 +130,7 @@ class CleaningModel(mesa.Model):
         self.tiempo_max = tiempo_max
         self.tiempo_transcurrido = 0  # Contador de tiempo de simulación.
         self.schedule = mesa.time.RandomActivation(self)
-        self.grid = mesa.space.MultiGrid(width=N, height=M, torus=True)
+        self.grid = mesa.space.MultiGrid(width=N, height=M, torus=False)
 
         # Creación de agentes y asignación a la celda (0,0).
         for i in range(self.num_agents):
