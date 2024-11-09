@@ -53,8 +53,6 @@ def cell_portrayal(cell):
 
     return portrayal
 
-# Configuración de la cuadrícula para la visualización de agentes y la habitación
-grid = mesa.visualization.CanvasGrid(agent_portrayal, 10, 10, 500, 500)
 
 # Gráfico para visualizar el porcentaje de celdas limpias en cada paso
 chart_porcentaje_limpio = mesa.visualization.ChartModule(
@@ -114,13 +112,19 @@ class SimulationDataElement(mesa.visualization.TextElement):
 
 # Parámetros del modelo de limpieza
 model_kwargs = {
-    "M": 10,  # Número de filas de la habitación
-    "N": 10,  # Número de columnas de la habitación
-    "num_agents": 10,  # Número de agentes de limpieza
+    "M": 15,  # Número de filas de la habitación
+    "N": 15,  # Número de columnas de la habitación
+    "num_agents": 7,  # Número de agentes de limpieza
     # Porcentaje inicial de celdas sucias (como decimal)
-    "porcentaje_sucias": 0.5,
-    "tiempo_max": 20  # Tiempo máximo de ejecución
+    "porcentaje_sucias": 0.9,
+    "tiempo_max": 200  # Tiempo máximo de ejecución
 }
+
+m = model_kwargs["M"]
+n = model_kwargs["N"]
+
+# Configuración de la cuadrícula para la visualización de agentes y la habitación
+grid = mesa.visualization.CanvasGrid(agent_portrayal, m, n, 500, 500)
 
 # Configuración del servidor para la simulación
 server = mesa.visualization.ModularServer(

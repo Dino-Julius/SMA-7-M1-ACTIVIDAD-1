@@ -132,7 +132,7 @@ class CleaningModel(mesa.Model):
         self.schedule = mesa.time.RandomActivation(self)
         self.grid = mesa.space.MultiGrid(width=N, height=M, torus=False)
 
-        # Creación de agentes y asignación a la celda (0,0).
+        # Creación de agentes y asignación a la celda (1,1).
         for i in range(self.num_agents):
             new_agent = CleaningAgent(i, self)
             self.schedule.add(new_agent)
