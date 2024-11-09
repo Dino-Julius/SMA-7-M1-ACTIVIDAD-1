@@ -136,7 +136,7 @@ class CleaningModel(mesa.Model):
         for i in range(self.num_agents):
             new_agent = CleaningAgent(i, self)
             self.schedule.add(new_agent)
-            self.grid.place_agent(new_agent, (0, 0))
+            self.grid.place_agent(new_agent, (1, 1))
 
         # Inicialización de la recolección de datos.
         self.datacollector = mesa.datacollection.DataCollector(
